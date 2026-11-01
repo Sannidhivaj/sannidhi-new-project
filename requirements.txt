@@ -1,5 +1,5 @@
 streamlit
-dotenv
+python-dotenv
 langchain
 langchain_google_genai
 python-pptx

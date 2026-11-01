@@ -18,7 +18,7 @@ from pptx.dml.color import RGBColor
 
 load_dotenv()
 
-API_KEY = os.getenv("GEM")
+API_KEY = os.getenv("GEM") or st.secrets.get("GEM")
 
 st.set_page_config(
     page_title="Sannidhi's PPT Generator",
