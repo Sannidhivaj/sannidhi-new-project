@@ -177,7 +177,11 @@ def search_wikimedia_image(query):
     """
 
     headers = {
-        "User-Agent": "SannidhiPPTGenerator/1.0 (educational project)"
+        "User-Agent": (
+            "SannidhiPPTGenerator/1.0 "
+            "(https://github.com/Sannidhivaj/sannidhi-new-project; "
+            "educational project)"
+        )
     }
 
     try:
@@ -194,6 +198,13 @@ def search_wikimedia_image(query):
             headers=headers,
             timeout=15
         )
+
+        if search_response.status_code != 200:
+            print(
+                f"[image search] '{query}' failed "
+                f"(HTTP {search_response.status_code})."
+            )
+            return None
 
         search_response.raise_for_status()
 
@@ -259,7 +270,8 @@ def search_wikimedia_image(query):
                 ):
                     return image_bytes
 
-    except (requests.RequestException, ValueError, KeyError):
+    except (requests.RequestException, ValueError, KeyError) as exc:
+        print(f"[image fetch] '{query}' failed: {exc}")
         return None
 
     return None
